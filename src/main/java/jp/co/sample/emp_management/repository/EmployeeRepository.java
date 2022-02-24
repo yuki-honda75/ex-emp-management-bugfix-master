@@ -94,7 +94,7 @@ public class EmployeeRepository {
 		String sql = "SELECT * FROM employees";
 		MapSqlParameterSource param = new MapSqlParameterSource();
 		if (!keyword.isEmpty()) {
-			sql += " WHERE name=:keyword";
+			sql += " WHERE name LIKE :keyword";
 			param.addValue("keyword", "%" + keyword + "%");
 		}
 		List<Employee> employeeList = template.query(sql, param, EMPLOYEE_ROW_MAPPER);
