@@ -68,7 +68,8 @@
 					<input id="keyword" name="keyword" type="text" placeholder="検索する名前を入力してください" size="30">
 					<button type="submit">検索</button>
 				</form>
-				<span th:if="${keyword} != null" th:text="${keyword} + ' の検索結果'"></span>
+				<p th:if="${keyword} != null" th:text="${keyword} + ' の検索結果'"></p>
+				<span th:if="${#lists.isEmpty(searchEmployeeList) && keyword != null}" th:text="一件もありませんでした"></span>
 				<table class="table table-striped">
 					<thead>
 						<tr>
