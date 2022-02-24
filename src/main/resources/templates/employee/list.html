@@ -63,7 +63,13 @@
 <!-- ここから上を編集する必要はありません -->
 
 <!-- ここにモックのtable要素を貼り付けます -->
-
+				<form action="list.html" th:action="@{/employee/search}">
+					<label for="keyword">従業員検索：</label>
+					<input id="keyword" name="keyword" type="text" placeholder="検索する名前を入力してください" size="30">
+					<button type="submit">検索</button>
+				</form>
+				<p th:if="${keyword} != null" th:text="${keyword} + ' の検索結果'"></p>
+				<span th:if="${#lists.isEmpty(searchEmployeeList) && keyword != null}" th:text="一件もありませんでした"></span>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -86,6 +92,19 @@
 								<span th:text="${employee.dependentsCount} + '人'">3人</span>
 							</td>
 						</tr>
+						<tr th:each="employee : ${searchEmployeeList}">
+              <td>
+                <a href="detail.html" th:href="@{'/employee/showDetail?id=' + ${employee.id}}">
+                  <span th:text="${employee.name}">山田太郎</span>
+                </a>
+              </td>
+              <td>
+                <span th:text="${employee.hireDate}">2016/12/1</span>
+              </td>
+              <td>
+                <span th:text="${employee.dependentsCount} + '人'">3人</span>
+              </td>
+            </tr>
 					</tbody>
 				</table>
 
